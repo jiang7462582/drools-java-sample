@@ -1,0 +1,1 @@
+###Play2.5 + drools6.4 + Java Sample 

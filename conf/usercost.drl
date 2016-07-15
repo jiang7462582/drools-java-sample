@@ -1,0 +1,31 @@
+package rules;
+
+import modles.User;
+
+rule baseCost
+    when
+        $user:User(distance<=3,waitTime<=5)
+    then
+        $user.setCost(8.0);
+end
+
+rule LongDistance
+    when
+        $user:User(distance>3,waitTime<=5)
+    then
+        $user.setCost(8.0+($user.distance-3)*1.5);
+end
+
+rule waitCost
+    when
+        $user:User(distance<3,waitTime<5)
+    then
+        $user.setCost(8.0+($user.waitTime-5)*0.1);
+end
+
+rule LongDistancLongWaitTime
+    when
+        $user:User(distance>3,waitTime>5)
+    then
+        $user.setCost(8.0+($user.distance-3)*1.5+($user.waitTime-5)*0.1);
+end
